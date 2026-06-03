@@ -150,18 +150,6 @@ Open http://localhost:3000
 
 ---
 
-## Vercel Deployment
-
-1. Push the repo to GitHub
-2. Import the repo in [Vercel](https://vercel.com)
-3. Set environment variables in Vercel project settings:
-   - `DATABASE_URL` — your Neon connection string
-   - `NEXTAUTH_SECRET` — a random 32-char secret
-   - `NEXTAUTH_URL` — your Vercel deployment URL
-4. Deploy — Vercel auto-detects Next.js
-5. After first deployment, run the seed: `npm run db:seed`
-
----
 
 ## Features
 
