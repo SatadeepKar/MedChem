@@ -2,7 +2,7 @@ import { auth } from '@/auth'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const session = await auth()
   const { pathname } = request.nextUrl
 
@@ -19,13 +19,13 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
-  // Redirect admin from /dashboard to /admin
+  // Redirect admin from /dashboard root to /admin
   if (pathname === '/dashboard' && session.user.role === 'admin') {
     return NextResponse.redirect(new URL('/admin', request.url))
   }
 
-  // Redirect logged-in user away from login page
-  if (pathname === '/login' && session?.user) {
+  // Redirect already-logged-in user away from login page
+  if (pathname === '/login') {
     const dest = session.user.role === 'admin' ? '/admin' : '/dashboard'
     return NextResponse.redirect(new URL(dest, request.url))
   }
